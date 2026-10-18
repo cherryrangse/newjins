@@ -4,230 +4,380 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>마음쉼 심리상담소 | 당신의 이야기에 귀 기울입니다</title>
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Pretendard 폰트 -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <style>
     body {
       font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    }
+    .page-section { display: none; }
+    .page-section.active { display: block; }
+
+    /* 슬라이드 페이드 애니메이션 */
+    .hero-slide {
+      opacity: 0;
+      transition: opacity 1.2s ease-in-out, transform 6s ease-out;
+      transform: scale(1.03);
+    }
+    .hero-slide.active {
+      opacity: 1;
+      transform: scale(1);
     }
   </style>
 </head>
 <body class="bg-[#FAF8F5] text-stone-800 antialiased">
 
   <!-- 네비게이션 바 -->
-  <header class="sticky top-0 z-50 bg-[#FAF8F5]/90 backdrop-blur-md border-b border-stone-200">
+  <header class="sticky top-0 z-50 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-stone-200">
     <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-      <a href="#" class="text-xl font-bold text-emerald-900 tracking-tight">마음쉼 심리상담</a>
+      <a href="#" onclick="showPage('home')" class="text-xl font-bold text-emerald-900 tracking-tight">마음쉼 심리상담</a>
       <nav class="hidden md:flex space-x-8 text-sm font-medium text-stone-600">
-        <a href="#about" class="hover:text-emerald-800 transition">상담사 소개</a>
-        <a href="#programs" class="hover:text-emerald-800 transition">상담 프로그램</a>
-        <a href="#reviews" class="hover:text-emerald-800 transition">상담 후기</a>
-        <a href="#contact" class="hover:text-emerald-800 transition">예약 및 문의</a>
+        <a href="#about" onclick="showPage('home')" class="hover:text-emerald-800 transition">상담사 소개</a>
+        <a href="#programs" onclick="showPage('home')" class="hover:text-emerald-800 transition">상담 프로그램</a>
+        <button onclick="showPage('detail-all')" class="hover:text-emerald-800 transition font-semibold text-emerald-800">프로그램 상세·비용</button>
+        <a href="#reviews" onclick="showPage('home')" class="hover:text-emerald-800 transition">상담 후기</a>
       </nav>
-      <a href="#contact" class="px-4 py-2 rounded-full bg-emerald-800 text-white text-sm font-medium hover:bg-emerald-900 transition">
-        상담 문의하기
-      </a>
+      <button onclick="showPage('reservation')" class="px-4 py-2 rounded-full bg-emerald-800 text-white text-sm font-medium hover:bg-emerald-900 transition">
+        상담 예약 신청
+      </button>
     </div>
   </header>
 
-  <!-- 히어로 섹션 -->
-  <section class="max-w-5xl mx-auto px-6 py-20 md:py-28 text-center">
-    <span class="inline-block px-4 py-1.5 rounded-full bg-emerald-100 text-emerald-900 text-xs font-semibold mb-6">
-      1:1 맞춤형 비밀보장 심리상담
-    </span>
-    <h1 class="text-3xl md:text-5xl font-bold text-stone-900 leading-tight mb-6">
-      지친 마음이 잠시 쉬어갈 수 있도록,<br class="hidden md:inline" />
-      온전한 공감으로 함께합니다.
-    </h1>
-    <p class="text-base md:text-lg text-stone-600 max-w-2xl mx-auto mb-10 leading-relaxed">
-      불안, 우울, 대인관계의 어려움부터 말 못 할 고민까지.<br />
-      안전하고 따뜻한 공간에서 당신만의 회복 속도를 찾아드립니다.
-    </p>
-    <div class="flex flex-col sm:flex-row justify-center gap-4">
-      <a href="#contact" class="px-8 py-3.5 rounded-xl bg-emerald-800 text-white font-semibold hover:bg-emerald-900 transition shadow-sm">
-        초기상담 신청하기
-      </a>
-      <a href="#reviews" class="px-8 py-3.5 rounded-xl bg-white text-stone-700 font-semibold border border-stone-300 hover:bg-stone-100 transition">
-        내담자 후기 보기
-      </a>
-    </div>
-  </section>
+  <!-- ==================== [1] 메인 홈 화면 ==================== -->
+  <main id="page-home" class="page-section active">
 
-  <!-- 상담사 소개 & 철학 -->
-  <section id="about" class="bg-white py-20 border-y border-stone-200/80">
-    <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-      <div>
-        <h2 class="text-sm font-bold text-emerald-800 uppercase tracking-wider mb-2">About Counselor</h2>
-        <h3 class="text-2xl md:text-3xl font-bold text-stone-900 mb-6">
-          "판단하지 않고 있는 그대로의 당신을 마주합니다."
-        </h3>
-        <p class="text-stone-600 leading-relaxed mb-6">
-          안녕하세요. 마음의 소리에 귀 기울이는 심리상담사입니다. 살다 보면 혼자만의 힘으로는 버거운 순간들이 찾아옵니다. 저는 내담자 한 분 한 분이 자신의 내면을 안전하게 탐색하고, 스스로 회복할 수 있는 힘을 되찾도록 돕는 동반자가 되고자 합니다.
-        </p>
-        <ul class="space-y-3 text-sm text-stone-700">
-          <li class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-emerald-700"></span>
-            공인 상담심리전문가 / 임상심리 자격 보유
-          </li>
-          <li class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-emerald-700"></span>
-            성인 개인상담, 커플·부부상담, 직무 스트레스 코칭 전문
-          </li>
-          <li class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-emerald-700"></span>
-            철저한 비밀보장 원칙 및 100% 사전 예약제 운영
-          </li>
-        </ul>
+    <!-- 히어로 이미지 슬라이더 섹션 (헤더 바로 아래 영역) -->
+    <section class="relative w-full h-[540px] md:h-[620px] overflow-hidden flex items-center justify-center">
+      
+      <!-- 슬라이드 배경 이미지 3장 -->
+      <div id="hero-slider" class="absolute inset-0 w-full h-full">
+        <!-- 1. 숲속 오솔길 -->
+        <div class="hero-slide active absolute inset-0 bg-cover bg-center"
+             style="background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1920&q=85');">
+        </div>
+        <!-- 2. 따뜻한 단풍 풍경 -->
+        <div class="hero-slide absolute inset-0 bg-cover bg-center"
+             style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=85');">
+        </div>
+        <!-- 3. 두 사람이 손잡고 걸어가는 뒷모습 -->
+        <div class="hero-slide absolute inset-0 bg-cover bg-center"
+             style="background-image: url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1920&q=85');">
+        </div>
       </div>
-      <div class="bg-[#F4F1EA] p-8 rounded-2xl border border-stone-200">
-        <h4 class="text-lg font-bold text-stone-900 mb-4">이런 분들께 추천합니다</h4>
-        <div class="space-y-4">
-          <div class="bg-white p-4 rounded-xl shadow-sm">
-            <p class="font-medium text-stone-800">이유 없는 불안감과 무기력함이 지속될 때</p>
-          </div>
-          <div class="bg-white p-4 rounded-xl shadow-sm">
-            <p class="font-medium text-stone-800">가족, 연인, 직장 동료와의 관계가 힘들고 지칠 때</p>
-          </div>
-          <div class="bg-white p-4 rounded-xl shadow-sm">
-            <p class="font-medium text-stone-800">자존감이 낮아지고 스스로를 자책하는 일이 잦을 때</p>
-          </div>
-          <div class="bg-white p-4 rounded-xl shadow-sm">
-            <p class="font-medium text-stone-800">중요한 선택을 앞두고 내면의 정리가 필요할 때</p>
+
+      <!-- 글씨가 잘 보이도록 어두운 반투명 오버레이 -->
+      <div class="absolute inset-0 bg-stone-900/45"></div>
+
+      <!-- 중앙 텍스트 및 버튼 콘텐츠 -->
+      <div class="relative z-10 max-w-4xl mx-auto px-6 text-center text-white">
+        <span class="inline-block px-4 py-1.5 rounded-full bg-emerald-900/80 backdrop-blur-sm border border-emerald-400/30 text-emerald-100 text-xs font-semibold mb-6">
+          1:1 맞춤형 비밀보장 심리상담
+        </span>
+        <h1 class="text-3xl md:text-5xl font-bold leading-tight mb-6 drop-shadow-sm">
+          지친 마음이 잠시 쉬어갈 수 있도록,<br class="hidden md:inline" />
+          온전한 공감으로 함께합니다.
+        </h1>
+        <p class="text-base md:text-lg text-stone-100 max-w-2xl mx-auto mb-10 leading-relaxed drop-shadow-sm">
+          불안, 우울, 대인관계의 어려움부터 말 못 할 고민까지.<br />
+          안전하고 따뜻한 공간에서 당신만의 회복 속도를 찾아드립니다.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <button onclick="showPage('reservation')" class="px-8 py-3.5 rounded-xl bg-emerald-700 text-white font-semibold hover:bg-emerald-800 transition shadow-md">
+            초기상담 신청하기
+          </button>
+          <a href="#reviews" class="px-8 py-3.5 rounded-xl bg-white/95 text-stone-800 font-semibold hover:bg-white transition shadow-md">
+            내담자 후기 보기
+          </a>
+        </div>
+      </div>
+
+      <!-- 좌우 슬라이드 이동 화살표 -->
+      <button onclick="prevSlide()" aria-label="이전 이미지" class="hidden md:flex absolute left-6 z-20 w-11 h-11 rounded-full bg-black/25 hover:bg-black/50 text-white items-center justify-center transition">
+        &#10094;
+      </button>
+      <button onclick="nextSlide()" aria-label="다음 이미지" class="hidden md:flex absolute right-6 z-20 w-11 h-11 rounded-full bg-black/25 hover:bg-black/50 text-white items-center justify-center transition">
+        &#10095;
+      </button>
+
+      <!-- 하단 슬라이드 인디케이터 (점 3개 + 캡션) -->
+      <div class="absolute bottom-6 z-20 flex flex-col items-center gap-2">
+        <span id="slide-caption" class="text-xs text-stone-200/90 font-medium tracking-wide">01. 고요한 숲속 오솔길</span>
+        <div class="flex space-x-2.5">
+          <button onclick="goToSlide(0)" class="slide-dot w-8 h-2 rounded-full bg-white transition-all"></button>
+          <button onclick="goToSlide(1)" class="slide-dot w-2 h-2 rounded-full bg-white/50 hover:bg-white/80 transition-all"></button>
+          <button onclick="goToSlide(2)" class="slide-dot w-2 h-2 rounded-full bg-white/50 hover:bg-white/80 transition-all"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 상담사 소개 -->
+    <section id="about" class="bg-white py-20 border-b border-stone-200/80">
+      <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-sm font-bold text-emerald-800 uppercase tracking-wider mb-2">About Counselor</h2>
+          <h3 class="text-2xl md:text-3xl font-bold text-stone-900 mb-6">
+            "판단하지 않고 있는 그대로의 당신을 마주합니다."
+          </h3>
+          <p class="text-stone-600 leading-relaxed mb-6">
+            안녕하세요. 마음의 소리에 귀 기울이는 심리상담사입니다. 살다 보면 혼자만의 힘으로는 버거운 순간들이 찾아옵니다. 내담자 한 분 한 분이 자신의 내면을 안전하게 탐색하고 스스로 회복할 힘을 되찾도록 돕겠습니다.
+          </p>
+          <ul class="space-y-3 text-sm text-stone-700">
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-700"></span>공인 상담심리전문가 / 임상심리 자격 보유</li>
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-700"></span>성인 개인상담, 커플·부부상담, 직무 스트레스 코칭 전문</li>
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-700"></span>철저한 비밀보장 원칙 및 100% 사전 예약제 운영</li>
+          </ul>
+        </div>
+        <div class="bg-[#F4F1EA] p-8 rounded-2xl border border-stone-200">
+          <h4 class="text-lg font-bold text-stone-900 mb-4">이런 분들께 추천합니다</h4>
+          <div class="space-y-3 text-sm">
+            <div class="bg-white p-4 rounded-xl shadow-sm font-medium">이유 없는 불안감과 무기력함이 지속될 때</div>
+            <div class="bg-white p-4 rounded-xl shadow-sm font-medium">가족, 연인, 직장 동료와의 관계가 힘들고 지칠 때</div>
+            <div class="bg-white p-4 rounded-xl shadow-sm font-medium">자존감이 낮아지고 스스로를 자책하는 일이 잦을 때</div>
+            <div class="bg-white p-4 rounded-xl shadow-sm font-medium">중요한 선택을 앞두고 내면의 정리가 필요할 때</div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 상담 프로그램 안내 -->
-  <section id="programs" class="max-w-5xl mx-auto px-6 py-20">
-    <div class="text-center mb-14">
-      <h2 class="text-sm font-bold text-emerald-800 uppercase tracking-wider mb-2">Programs</h2>
-      <h3 class="text-2xl md:text-3xl font-bold text-stone-900">상담 프로그램 안내</h3>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="bg-white p-7 rounded-2xl border border-stone-200 shadow-sm">
-        <span class="inline-block px-3 py-1 rounded-md bg-stone-100 text-stone-700 text-xs font-semibold mb-4">50분 / 1:1 대면·비대면</span>
-        <h4 class="text-xl font-bold text-stone-900 mb-3">개인 심리상담</h4>
-        <p class="text-sm text-stone-600 leading-relaxed">
-          우울, 불안, 공황, 트라우마, 자존감 문제 등 개인이 겪는 정서적 어려움을 깊이 있게 다루고 근본적인 치유를 돕습니다.
-        </p>
-      </div>
-
-      <div class="bg-white p-7 rounded-2xl border border-stone-200 shadow-sm">
-        <span class="inline-block px-3 py-1 rounded-md bg-stone-100 text-stone-700 text-xs font-semibold mb-4">80분 / 2인 참여</span>
-        <h4 class="text-xl font-bold text-stone-900 mb-3">부부 · 커플 상담</h4>
-        <p class="text-sm text-stone-600 leading-relaxed">
-          반복되는 갈등 패턴과 대화 단절의 원인을 파악하고, 서로의 감정을 건강하게 전달하며 관계를 회복하는 방법을 연습합니다.
-        </p>
-      </div>
-
-      <div class="bg-white p-7 rounded-2xl border border-stone-200 shadow-sm">
-        <span class="inline-block px-3 py-1 rounded-md bg-stone-100 text-stone-700 text-xs font-semibold mb-4">종합심리검사 + 해석</span>
-        <h4 class="text-xl font-bold text-stone-900 mb-3">심리검사 및 자기이해</h4>
-        <p class="text-sm text-stone-600 leading-relaxed">
-          객관적인 성격 및 정서 검사를 통해 나의 기질과 스트레스 대처 방식을 이해하고 맞춤형 성장 방향을 설계합니다.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 상담 후기 (사진 없음, 이름 가운데 O 마스킹 처리) -->
-  <section id="reviews" class="bg-[#F3EFE6] py-20 border-t border-stone-200">
-    <div class="max-w-5xl mx-auto px-6">
+    <!-- 상담 프로그램 카드 (클릭 시 상세페이지 이동) -->
+    <section id="programs" class="max-w-5xl mx-auto px-6 py-20">
       <div class="text-center mb-14">
-        <h2 class="text-sm font-bold text-emerald-800 uppercase tracking-wider mb-2">Reviews</h2>
-        <h3 class="text-2xl md:text-3xl font-bold text-stone-900 mb-3">내담자 진솔 후기</h3>
-        <p class="text-sm text-stone-600">
-          개인정보 및 비밀보장을 위해 내담자 성함은 가운데 글자를 O 처리하여 게시합니다.
+        <h2 class="text-sm font-bold text-emerald-800 uppercase tracking-wider mb-2">Programs</h2>
+        <h3 class="text-2xl md:text-3xl font-bold text-stone-900 mb-2">상담 프로그램 안내</h3>
+        <p class="text-sm text-stone-500">각 프로그램을 클릭하시면 진행 과정과 비용 등 상세 안내를 확인하실 수 있습니다.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white p-7 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="inline-block px-3 py-1 rounded-md bg-stone-100 text-stone-700 text-xs font-semibold mb-4">50분 / 1:1 대면·비대면</span>
+            <h4 class="text-xl font-bold text-stone-900 mb-3">개인 심리상담</h4>
+            <p class="text-sm text-stone-600 leading-relaxed mb-6">
+              우울, 불안, 공황, 트라우마, 자존감 문제 등 개인이 겪는 정서적 어려움을 깊이 있게 다루고 근본적인 치유를 돕습니다.
+            </p>
+          </div>
+          <button onclick="showPage('detail-all')" class="w-full py-2.5 rounded-xl bg-stone-100 text-stone-800 text-sm font-semibold hover:bg-emerald-800 hover:text-white transition">
+            상세 내용 및 비용 보기 →
+          </button>
+        </div>
+
+        <div class="bg-white p-7 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="inline-block px-3 py-1 rounded-md bg-stone-100 text-stone-700 text-xs font-semibold mb-4">80분 / 2인 참여</span>
+            <h4 class="text-xl font-bold text-stone-900 mb-3">부부 · 커플 상담</h4>
+            <p class="text-sm text-stone-600 leading-relaxed mb-6">
+              반복되는 갈등 패턴과 대화 단절의 원인을 파악하고, 서로의 감정을 건강하게 전달하며 관계를 회복하는 방법을 연습합니다.
+            </p>
+          </div>
+          <button onclick="showPage('detail-all')" class="w-full py-2.5 rounded-xl bg-stone-100 text-stone-800 text-sm font-semibold hover:bg-emerald-800 hover:text-white transition">
+            상세 내용 및 비용 보기 →
+          </button>
+        </div>
+
+        <div class="bg-white p-7 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="inline-block px-3 py-1 rounded-md bg-stone-100 text-stone-700 text-xs font-semibold mb-4">종합심리검사 + 해석상담</span>
+            <h4 class="text-xl font-bold text-stone-900 mb-3">심리검사 및 자기이해</h4>
+            <p class="text-sm text-stone-600 leading-relaxed mb-6">
+              객관적인 성격 및 정서 검사를 통해 나의 기질과 스트레스 대처 방식을 이해하고 맞춤형 성장 방향을 설계합니다.
+            </p>
+          </div>
+          <button onclick="showPage('detail-all')" class="w-full py-2.5 rounded-xl bg-stone-100 text-stone-800 text-sm font-semibold hover:bg-emerald-800 hover:text-white transition">
+            상세 내용 및 비용 보기 →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 내담자 후기 (사진 없음, 이름 가운데 O 마스킹) -->
+    <section id="reviews" class="bg-[#F3EFE6] py-20 border-t border-stone-200">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="text-center mb-14">
+          <h2 class="text-sm font-bold text-emerald-800 uppercase tracking-wider mb-2">Reviews</h2>
+          <h3 class="text-2xl md:text-3xl font-bold text-stone-900 mb-3">내담자 진솔 후기</h3>
+          <p class="text-sm text-stone-600">개인정보 및 비밀보장을 위해 내담자 성함은 가운데 글자를 O 처리하여 게시합니다.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="text-amber-500 text-sm mb-3">★★★★★</div>
+              <p class="text-stone-700 text-sm md:text-base leading-relaxed mb-6">
+                "처음에는 남에게 제 속마음을 털어놓는 게 두려웠는데, 선생님께서 따뜻하고 편안하게 이끌어주셔서 매주 상담 시간이 기다려졌습니다. 막막했던 불안감이 많이 줄어들고 이제는 제 감정을 스스로 돌보는 법을 알게 되어 정말 만족스럽습니다."
+              </p>
+            </div>
+            <div class="border-t border-stone-100 pt-4 flex items-center justify-between text-xs text-stone-500">
+              <span class="font-semibold text-stone-800">김O지 님</span>
+              <span>성인 개인상담 (10회기)</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="text-amber-500 text-sm mb-3">★★★★★</div>
+              <p class="text-stone-700 text-sm md:text-base leading-relaxed mb-6">
+                "직장 생활과 대인관계 스트레스로 번아웃이 심하게 와서 찾게 되었습니다. 무조건적인 위로가 아니라 제가 왜 그런 패턴으로 힘들어했는지 객관적이면서도 다정하게 짚어주셔서 큰 도움이 되었어요. 주변 지인들에게도 꼭 추천하고 싶습니다."
+              </p>
+            </div>
+            <div class="border-t border-stone-100 pt-4 flex items-center justify-between text-xs text-stone-500">
+              <span class="font-semibold text-stone-800">이O훈 님</span>
+              <span>직무 스트레스 · 개인상담 (8회기)</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="text-amber-500 text-sm mb-3">★★★★★</div>
+              <p class="text-stone-700 text-sm md:text-base leading-relaxed mb-6">
+                "배우자와 대화가 자꾸 어긋나고 감정이 상해 커플 상담을 신청했습니다. 어느 한쪽 편을 들지 않고 두 사람의 입장을 세심하게 통역해 주셔서 서로를 깊이 이해하게 되었습니다. 상담 이후 집안 분위기가 훨씬 평화로워졌어요."
+              </p>
+            </div>
+            <div class="border-t border-stone-100 pt-4 flex items-center justify-between text-xs text-stone-500">
+              <span class="font-semibold text-stone-800">박O연 님</span>
+              <span>부부 · 커플 상담 (6회기)</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="text-amber-500 text-sm mb-3">★★★★★</div>
+              <p class="text-stone-700 text-sm md:text-base leading-relaxed mb-6">
+                "늘 스스로를 자책하고 눈치를 보는 성격 때문에 우울감이 깊었는데, 상담을 받으며 제 있는 그대로의 모습을 인정하는 연습을 할 수 있었습니다. 인생에서 가장 잘한 선택 중 하나라고 생각할 만큼 만족스러운 시간이었습니다."
+              </p>
+            </div>
+            <div class="border-t border-stone-100 pt-4 flex items-center justify-between text-xs text-stone-500">
+              <span class="font-semibold text-stone-800">최O서 님</span>
+              <span>자존감 · 정서 심층상담 (12회기)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== [2] 상세 페이지 (프로그램 & 비용 & 절차 & FAQ) ==================== -->
+  <section id="page-detail-all" class="page-section max-w-4xl mx-auto px-6 py-16">
+    <button onclick="showPage('home')" class="inline-flex items-center text-sm font-medium text-emerald-800 hover:underline mb-8">
+      ← 메인 페이지로 돌아가기
+    </button>
+
+    <div class="bg-white p-8 md:p-12 rounded-3xl border border-stone-200 shadow-sm space-y-14">
+      <div class="border-b border-stone-200 pb-8">
+        <span class="text-xs font-bold text-emerald-800 uppercase tracking-wider">Program Details</span>
+        <h2 class="text-2xl md:text-4xl font-bold text-stone-900 mt-2 mb-4">상담 프로그램 상세 및 비용 안내</h2>
+        <p class="text-stone-600 text-sm md:text-base leading-relaxed">
+          마음쉼 심리상담소는 내담자의 현재 상황과 정서적 필요에 맞춘 체계적인 상담 과정을 제공합니다. 모든 상담 내용은 철저히 비밀이 보장됩니다.
         </p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6">
-        <!-- 후기 1 -->
-        <div class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm flex flex-col justify-between">
-          <div>
-            <div class="text-amber-500 text-sm mb-3">★★★★★</div>
-            <p class="text-stone-700 text-sm md:text-base leading-relaxed mb-6">
-              "처음에는 남에게 제 속마음을 털어놓는 게 두려웠는데, 선생님께서 따뜻하고 편안하게 이끌어주셔서 매주 상담 시간이 기다려졌습니다. 막막했던 불안감이 많이 줄어들고 이제는 제 감정을 스스로 돌보는 법을 알게 되어 정말 만족스럽습니다."
-            </p>
+      <div>
+        <h3 class="text-xl font-bold text-stone-900 mb-6">01. 상담 진행 절차</h3>
+        <div class="grid sm:grid-cols-4 gap-4">
+          <div class="bg-[#FAF8F5] p-5 rounded-2xl border border-stone-200">
+            <div class="text-emerald-800 font-bold text-xs mb-1">STEP 01</div>
+            <div class="font-bold text-stone-900 mb-2">예약 문의 및 접수</div>
+            <p class="text-xs text-stone-600 leading-relaxed">온라인 예약 폼 또는 카카오톡으로 희망 일정과 간단한 고민을 접수합니다.</p>
           </div>
-          <div class="border-t border-stone-100 pt-4 flex items-center justify-between text-xs text-stone-500">
-            <span class="font-semibold text-stone-800">김O지 님</span>
-            <span>성인 개인상담 (10회기)</span>
+          <div class="bg-[#FAF8F5] p-5 rounded-2xl border border-stone-200">
+            <div class="text-emerald-800 font-bold text-xs mb-1">STEP 02</div>
+            <div class="font-bold text-stone-900 mb-2">초기 상담 (1회기)</div>
+            <p class="text-xs text-stone-600 leading-relaxed">현재 겪고 있는 어려움의 원인을 탐색하고 향후 상담 목표와 방향을 설정합니다.</p>
+          </div>
+          <div class="bg-[#FAF8F5] p-5 rounded-2xl border border-stone-200">
+            <div class="text-emerald-800 font-bold text-xs mb-1">STEP 03</div>
+            <div class="font-bold text-stone-900 mb-2">심층 상담 및 검사</div>
+            <p class="text-xs text-stone-600 leading-relaxed">주 1회 정기적인 만남을 통해 내면의 감정을 다루고 건강한 대처 방식을 연습합니다.</p>
+          </div>
+          <div class="bg-[#FAF8F5] p-5 rounded-2xl border border-stone-200">
+            <div class="text-emerald-800 font-bold text-xs mb-1">STEP 04</div>
+            <div class="font-bold text-stone-900 mb-2">상담 종결 및 자립</div>
+            <p class="text-xs text-stone-600 leading-relaxed">일상에서의 긍정적 변화를 확인하고 스스로 마음을 돌볼 수 있도록 마무리합니다.</p>
           </div>
         </div>
+      </div>
 
-        <!-- 후기 2 -->
-        <div class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm flex flex-col justify-between">
-          <div>
-            <div class="text-amber-500 text-sm mb-3">★★★★★</div>
-            <p class="text-stone-700 text-sm md:text-base leading-relaxed mb-6">
-              "직장 생활과 대인관계 스트레스로 번아웃이 심하게 와서 찾게 되었습니다. 무조건적인 위로가 아니라 제가 왜 그런 패턴으로 힘들어했는지 객관적이면서도 다정하게 짚어주셔서 큰 도움이 되었어요. 주변 지인들에게도 꼭 추천하고 싶습니다."
-            </p>
-          </div>
-          <div class="border-t border-stone-100 pt-4 flex items-center justify-between text-xs text-stone-500">
-            <span class="font-semibold text-stone-800">이O훈 님</span>
-            <span>직무 스트레스 · 개인상담 (8회기)</span>
-          </div>
+      <div>
+        <h3 class="text-xl font-bold text-stone-900 mb-6">02. 프로그램별 시간 및 비용 안내</h3>
+        <div class="overflow-x-auto border border-stone-200 rounded-2xl">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-stone-100 text-stone-800 font-semibold border-b border-stone-200">
+              <tr>
+                <th class="p-4">구분</th>
+                <th class="p-4">소요 시간</th>
+                <th class="p-4">진행 방식</th>
+                <th class="p-4">회기당 비용</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-stone-200 text-stone-700">
+              <tr>
+                <td class="p-4 font-semibold text-stone-900">성인 개인 심리상담</td>
+                <td class="p-4">50분</td>
+                <td class="p-4">대면 / 비대면(화상·전화)</td>
+                <td class="p-4 font-semibold text-emerald-900">70,000원</td>
+              </tr>
+              <tr>
+                <td class="p-4 font-semibold text-stone-900">부부 · 커플 상담</td>
+                <td class="p-4">80분</td>
+                <td class="p-4">대면 / 비대면(화상)</td>
+                <td class="p-4 font-semibold text-emerald-900">120,000원</td>
+              </tr>
+              <tr>
+                <td class="p-4 font-semibold text-stone-900">성격·정서 심리검사 패키지</td>
+                <td class="p-4">검사 실시 + 해석 60분</td>
+                <td class="p-4">온라인 검사 후 해석상담</td>
+                <td class="p-4 font-semibold text-emerald-900">100,000원</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+      </div>
 
-        <!-- 후기 3 -->
-        <div class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm flex flex-col justify-between">
-          <div>
-            <div class="text-amber-500 text-sm mb-3">★★★★★</div>
-            <p class="text-stone-700 text-sm md:text-base leading-relaxed mb-6">
-              "배우자와 대화가 자꾸 어긋나고 감정이 상해 커플 상담을 신청했습니다. 어느 한쪽 편을 들지 않고 두 사람의 입장을 세심하게 통역해 주셔서 서로를 깊이 이해하게 되었습니다. 상담 이후 집안 분위기가 훨씬 평화로워졌어요."
-            </p>
-          </div>
-          <div class="border-t border-stone-100 pt-4 flex items-center justify-between text-xs text-stone-500">
-            <span class="font-semibold text-stone-800">박O연 님</span>
-            <span>부부 · 커플 상담 (6회기)</span>
-          </div>
-        </div>
-
-        <!-- 후기 4 -->
-        <div class="bg-white p-7 rounded-2xl border border-stone-200/80 shadow-sm flex flex-col justify-between">
-          <div>
-            <div class="text-amber-500 text-sm mb-3">★★★★★</div>
-            <p class="text-stone-700 text-sm md:text-base leading-relaxed mb-6">
-              "늘 스스로를 자책하고 눈치를 보는 성격 때문에 우울감이 깊었는데, 상담을 받으며 제 있는 그대로의 모습을 인정하는 연습을 할 수 있었습니다. 인생에서 가장 잘한 선택 중 하나라고 생각할 만큼 만족스러운 시간이었습니다."
-            </p>
-          </div>
-          <div class="border-t border-stone-100 pt-4 flex items-center justify-between text-xs text-stone-500">
-            <span class="font-semibold text-stone-800">최O서 님</span>
-            <span>자존감 · 정서 심층상담 (12회기)</span>
-          </div>
-        </div>
+      <div class="pt-4 text-center">
+        <button onclick="showPage('reservation')" class="px-10 py-4 rounded-xl bg-emerald-800 text-white font-semibold hover:bg-emerald-900 transition shadow-sm">
+          상담 예약 신청하러 가기
+        </button>
       </div>
     </div>
   </section>
 
-  <!-- 예약 및 문의 섹션 -->
-  <section id="contact" class="max-w-3xl mx-auto px-6 py-20 text-center">
-    <h2 class="text-sm font-bold text-emerald-800 uppercase tracking-wider mb-2">Contact & Reservation</h2>
-    <h3 class="text-2xl md:text-3xl font-bold text-stone-900 mb-4">상담 예약 및 문의</h3>
-    <p class="text-stone-600 text-sm md:text-base mb-8">
-      모든 상담은 100% 사전 예약제로 진행됩니다.<br />
-      편하신 방법으로 문의 남겨주시면 확인 후 신속히 안내해 드리겠습니다.
-    </p>
+  <!-- ==================== [3] 상세 페이지 (상담 예약 신청 폼) ==================== -->
+  <section id="page-reservation" class="page-section max-w-2xl mx-auto px-6 py-16">
+    <button onclick="showPage('home')" class="inline-flex items-center text-sm font-medium text-emerald-800 hover:underline mb-8">
+      ← 메인 페이지로 돌아가기
+    </button>
 
-    <div class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm text-left space-y-4">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between py-2 border-b border-stone-100">
-        <span class="font-semibold text-stone-800">운영 시간</span>
-        <span class="text-stone-600 text-sm">평일 10:00 - 20:00 / 토요일 10:00 - 16:00 (일·공휴일 휴무)</span>
-      </div>
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between py-2 border-b border-stone-100">
-        <span class="font-semibold text-stone-800">상담 방식</span>
-        <span class="text-stone-600 text-sm">대면 상담 및 비대면 화상/전화 상담 가능</span>
-      </div>
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between py-2">
-        <span class="font-semibold text-stone-800">예약 문의</span>
-        <span class="text-emerald-800 font-semibold text-sm">카카오톡 채널 / 이메일 또는 전화 문의</span>
-      </div>
+    <div class="bg-white p-8 md:p-10 rounded-3xl border border-stone-200 shadow-sm">
+      <span class="text-xs font-bold text-emerald-800 uppercase tracking-wider">Reservation</span>
+      <h2 class="text-2xl md:text-3xl font-bold text-stone-900 mt-2 mb-3">초기상담 예약 및 문의</h2>
+      <p class="text-sm text-stone-600 mb-8">
+        아래 양식을 작성해 주시면 확인 후 남겨주신 연락처로 안내 메시지를 드립니다.
+      </p>
+
+      <form onsubmit="handleReservation(event)" class="space-y-5">
+        <div>
+          <label class="block text-sm font-semibold text-stone-800 mb-2">성함 (또는 가명 가능)</label>
+          <input type="text" required placeholder="홍길동" class="w-full px-4 py-3 rounded-xl border border-stone-300 text-sm focus:outline-none focus:border-emerald-800" />
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-stone-800 mb-2">연락처 (문자 안내용)</label>
+          <input type="tel" required placeholder="010-0000-0000" class="w-full px-4 py-3 rounded-xl border border-stone-300 text-sm focus:outline-none focus:border-emerald-800" />
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-stone-800 mb-2">희망 상담 프로그램</label>
+          <select class="w-full px-4 py-3 rounded-xl border border-stone-300 text-sm focus:outline-none focus:border-emerald-800 bg-white">
+            <option>성인 개인 심리상담 (50분)</option>
+            <option>부부 · 커플 상담 (80분)</option>
+            <option>심리검사 및 자기이해 패키지</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-stone-800 mb-2">간단한 상담 신청 사유 (비밀 보장)</label>
+          <textarea rows="4" placeholder="현재 겪고 계신 어려움을 편하게 적어주세요." class="w-full px-4 py-3 rounded-xl border border-stone-300 text-sm focus:outline-none focus:border-emerald-800"></textarea>
+        </div>
+        <button type="submit" class="w-full py-4 rounded-xl bg-emerald-800 text-white font-semibold hover:bg-emerald-900 transition">
+          상담 신청 접수하기
+        </button>
+      </form>
     </div>
   </section>
 
@@ -238,6 +388,81 @@
       <p>© 2026 마음쉼 심리상담. All rights reserved.</p>
     </div>
   </footer>
+
+  <!-- 슬라이더 및 페이지 전환 스크립트 -->
+  <script>
+    // 1. 이미지 슬라이더 로직
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.slide-dot');
+    const caption = document.getElementById('slide-caption');
+    const captions = [
+      '01. 고요한 숲속 오솔길',
+      '02. 마음을 물들이는 따뜻한 계절과 단풍',
+      '03. 함께 손잡고 걸어가는 동행'
+    ];
+
+    // 단풍 이미지를 확실한 가을 단풍 숲길 고화질 이미지로 세팅
+    slides[1].style.backgroundImage = "url('https://images.unsplash.com/photo-1507041957456-9c397ce39c97?auto=format&fit=crop&w=1920&q=85')";
+
+    function updateSlider(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+      dots.forEach((dot, i) => {
+        if (i === index) {
+          dot.className = 'slide-dot w-8 h-2 rounded-full bg-white transition-all';
+        } else {
+          dot.className = 'slide-dot w-2 h-2 rounded-full bg-white/50 hover:bg-white/80 transition-all';
+        }
+      });
+      caption.textContent = captions[index];
+      currentSlide = index;
+    }
+
+    function nextSlide() {
+      let next = (currentSlide + 1) % slides.length;
+      updateSlider(next);
+    }
+
+    function prevSlide() {
+      let prev = (currentSlide - 1 + slides.length) % slides.length;
+      updateSlider(prev);
+    }
+
+    function goToSlide(index) {
+      updateSlider(index);
+      resetInterval();
+    }
+
+    let slideInterval = setInterval(nextSlide, 4500);
+
+    function resetInterval() {
+      clearInterval(slideInterval);
+      slideInterval = setInterval(nextSlide, 4500);
+    }
+
+    // 2. 상세 페이지 화면 전환 로직
+    function showPage(pageId) {
+      document.querySelectorAll('.page-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      if (pageId === 'home') {
+        document.getElementById('page-home').classList.add('active');
+      } else if (pageId === 'detail-all') {
+        document.getElementById('page-detail-all').classList.add('active');
+      } else if (pageId === 'reservation') {
+        document.getElementById('page-reservation').classList.add('active');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function handleReservation(e) {
+      e.preventDefault();
+      alert('상담 신청이 정상적으로 확인되었습니다. 남겨주신 연락처로 곧 안내드리겠습니다.');
+      showPage('home');
+    }
+  </script>
 
 </body>
 </html>
